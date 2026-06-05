@@ -1,9 +1,6 @@
 package com.example.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Student {
@@ -16,14 +13,6 @@ public class Student {
     private String email;
     private String course;
     private int age;
-
-    // Required by JPA
-    public Student() {
-    }
-
-    public Student(int age) {
-        this.age = age;
-    }
 
     public Long getId() {
         return id;
@@ -63,5 +52,22 @@ public class Student {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+    public Student() {
+    }
+
+    // getters and setters
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
